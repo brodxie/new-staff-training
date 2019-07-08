@@ -5,8 +5,7 @@
 - 注解的使用（Java8编程参考：12.4）  
 
 IDE使用IDEA。
-基本的知识脉络按照JAVA核心技术中列出的章节，同时可以参考JAVA8变成参考中相关的章节。使用markdown记录相关的笔记（[markdown教程](https://www.jianshu.com/p/335db5716248  "markdown教程")）。  markdown编辑器可以使用[vscode](https://code.visualstudio.com/ "vscode官网")， 安装如下插件：  
-![markdown-plugin](resource/markdown-plugin.png)  
+基本的知识脉络按照JAVA核心技术中列出的章节，同时可以参考JAVA8变成参考中相关的章节。使用markdown记录相关的笔记（[markdown教程](https://www.jianshu.com/p/335db5716248  "markdown教程")）
 
 
 ## Linux基础 3D

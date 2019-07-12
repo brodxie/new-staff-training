@@ -1,3 +1,9 @@
+## 前言
+培训的一些资料会放在百度网盘中：
+>链接：https://pan.baidu.com/s/18Nc1VRh8scory0ZU70KxdQ  
+>提取码：05z1 
+
+
 ## Java语言 2W
 - [monkey1024教程](http://www.monkey1024.com/javaseroute)  
 - Java核心技术卷I：ch1~ch9、ch14  
@@ -9,23 +15,35 @@ IDE使用IDEA。
 
 
 ## Linux基础 3D
-- VMware下CentOS安装
-- Linux基本操作
-
-## HTML+CSS+JavaScript 1W
-**目标**可以实现简单的页面与交互
-- HTML基础
-- Bootstrap
-- JavaScript基础
-- jQuery基础
+- VMware下CentOS安装  
+  [VMware下载地址](https://my.vmware.com/cn/web/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/15_0)  
+  CentOS镜像可以到[163源](http://mirrors.163.com/)下载  
+  SSH工具使用[XShell](https://www.netsarang.com/zh/xshell/), 安装包见百度网盘链接中
+- Linux基本操作  
+  参考[菜鸟教程](https://www.runoob.com/linux/linux-tutorial.html)  
+  深入了解可以参考网盘分享的电子书  
 
 ## Mysql+JDBC 1W
-- Linux下安装、配置与管理
-- SQL
-- JDBC
+- Linux下安装、配置与管理  
+  先安装5.7版本  
+  参考网上[教程](https://www.cnblogs.com/nicknailo/articles/8563737.html)  
+- SQL  
+  https://www.runoob.com/mysql/mysql-tutorial.html
+- JDBC  
+  参见Java核心技术一书
 
 ## TOMCAT+Servlet+JSP 1W
+- HTTP协议  
+  了解HTTP协议：https://www.runoob.com/http/http-tutorial.html
 - TOMCAT安装配置使用
+- Servlet
+- JSP
+- 使用JSP+Servlet+JSP+JDBC实现一个简单的贴吧系统
+  可以查看帖子列表
+  可以查看帖子详情，显示每一楼
+  设置一个超级管理员，超级管理员可以添加用户，可以设置用户为管理员
+  管理员可以删除帖子，每个人可以删除自己发的帖子
+  
 
 ## Ajax+JSON 2D
 

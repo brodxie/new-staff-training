@@ -35,7 +35,8 @@ IDE使用IDEA。
 ## TOMCAT+Servlet+JSP 1W
 - HTTP协议  
   了解HTTP协议：https://www.runoob.com/http/http-tutorial.html
-- TOMCAT安装配置使用
+- TOMCAT安装配置使用  
+  [monkey1024web教程](http://www.monkey1024.com/javawebroute) 
 - Servlet
 - JSP
 - 使用JSP+Servlet+JSP+JDBC实现一个简单的贴吧系统

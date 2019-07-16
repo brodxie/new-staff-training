@@ -46,15 +46,15 @@ vmware的三种网络工作模式：Bridged(桥接模式，VMnet0)、NAT(网络�
 
 Bridged模式：将主机网卡与虚拟机虚拟的网卡利用虚拟网桥进行通信。
 
-![](D:\cmss\gitNote\new-staff-training\2019\liyuanyuan\notes\img\01Bridged.png)
+![](..\img\01Bridged.png)
 
 NAT模式：利用虚拟的NAT设备以及虚拟DHCP服务器来使虚拟机连接外网，而VMware VMnet8虚拟网卡是用来与虚拟机通信的。
 
-![](D:\cmss\gitNote\new-staff-training\2019\liyuanyuan\notes\img\02NAT.png)
+![](..\img\02NAT.png)
 
 Host-Only模式：NAT模式去除了虚拟NAT设备，然后使用VMnet1虚拟网卡连接VMnet1虚拟交换机来与虚拟机通信的。
 
-![](D:\cmss\gitNote\new-staff-training\2019\liyuanyuan\notes\img\03Host-Only.png)
+![](..\img\03Host-Only.png)
 
 **附1. 常用命令汇总**
 

@@ -132,11 +132,68 @@
 	
 		
 	
-	**- 连接**
+	**- 连接：**
 	
-	- **INNER JOIN（内连接,或等值连接）**：获取两个表中字段匹配关系的记录。
-	- **LEFT JOIN（左连接）：**获取左表所有记录，即使右表没有对应匹配的记录。
-	- **RIGHT JOIN（右连接）：** 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。
+	- INNER JOIN（内连接,或等值连接）：获取两个表匹配记录。
+	
+	- LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应记录。
+	
+	- RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应记录。
+	
+		
+	
+	**- NULL值处理：**
+	
+	- **IS NULL:** 当列的值是 NULL,此运算符返回 true。
+	
+	- **IS NOT NULL:** 当列的值不为 NULL, 运算符返回 true。
+	
+	- **<=>:** 比较操作符（不同于=运算符），当比较的的两个值为 NULL 时返回 true。
+	
+	- 不能使用 = NULL 或 != NULL 在列中查找 NULL 值 。 在 MySQL 中，NULL 值与任何其它值的比较（即使是 NULL）永远返回 false，即 NULL = NULL 返回false 。MySQL 中处理 NULL 使用 IS NULL 和 IS NOT NULL 运算符。
+	
+		
+	
+	**- 正则表达式：**
+	
+	- REGEXP 操作符
+	
+	- ^：输入字符串的开始位置；$：输入字符串的结束位置；.：除 "\n" 之外的任何单个字符；[...]：字符集合；`[^...]`：未包含的任意字符；p1|p2|p3：匹配 p1 或 p2 或 p3；*：匹配前面的子表达式零次或多次；+：匹配前面的子表达式一次或多次。
+	
+		
+	
+	**- 事务：**
+	
+	- 主要用于处理操作量大，复杂度高的数据
+	
+	- 只有使用了Innodb数据库引擎的数据库或表才支持事务
+	
+	- ACID：原子性（**A**tomicity，或称不可分割性）、一致性（**C**onsistency）、隔离性（**I**solation，又称独立性）、持久性（**D**urability）
+	
+		- 隔离级别：读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）
+	
+		- 持久性：事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。
+	
+			
+	
+	**- ALTER命令：**
+	
+	- 作用：修改数据表名或者修改数据表字段
+	
+	- 组合使用：DROP，删除字段；ADD，添加字段；TYPE，修改数据表类型；RENAME，修改表名
+	
+		
+	
+	**- 索引：**
+	
+	- 类型：单列索引、组合索引。
+	- 要求：确保索引是应用在SQL查询语句的条件（一般作为WHERE子句的条件）
+	- 缺点：
+		- 索引提高了查询速度，但降低了更新表的速度（如INSERT、UPDATE、DELETE）。因为更新表时，MySQL需要保存数据和索引文件。
+		- 建立索引会占用磁盘空间的索引文件。
+	- 创建索引：CREATE INDEX indexName ON mytable(username(length));
+	- 删除索引：DROP INDEX [indexName] ON mytable;
+	- 唯一索引：索引值必须唯一，但允许空值。如果是组合索引，则列值的组合必须唯一
 
 
 

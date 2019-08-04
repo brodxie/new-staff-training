@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <servlet>
+        <servlet-name>miniPostServlet</servlet-name>
+        <servlet-class>servlet.UserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>miniPostServlet</servlet-name>
+        <url-pattern>/postServlet</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+            <taglib-location>/WEB-INF/lib/c.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+</web-app>

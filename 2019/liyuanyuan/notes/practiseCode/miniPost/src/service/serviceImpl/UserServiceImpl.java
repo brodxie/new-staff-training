@@ -25,9 +25,9 @@ public class UserServiceImpl implements UserService {
 
     // 验证登录信息
     @Override
-    public int confirmLoginInfo(String userName, String passWord) {
-        int tmpUserId = UserDao.getUserId(userName, passWord);
-        return tmpUserId;
+    public HashMap<String,Integer> confirmLoginInfo(String userName, String passWord) {
+        HashMap<String,Integer> tmpUserMap = UserDao.getUserId(userName, passWord);
+        return tmpUserMap;
     }
 
     // 更新用户类型

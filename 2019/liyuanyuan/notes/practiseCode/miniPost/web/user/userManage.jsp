@@ -40,14 +40,16 @@
                   <button class="btn btn-default" type="button">搜索</button>
                 </span>
                 </div>
-                <!-- Single button -->
+
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Annerial <span class="caret"></span>
+                        ${sessionScope.loginUsername} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人中心</a></li>
-                        <li><a href="/miniPost/userManage?method=getAllUserInfo">用户管理</a></li>
+                        <c:if test="${sessionScope.loginTypeId == 1}">
+                            <li><a href="/miniPost/userManage?method=getAllUserInfo">用户管理</a></li>
+                        </c:if>
                         <li role="separator" class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/index.jsp">退出登录</a></li>
                     </ul>

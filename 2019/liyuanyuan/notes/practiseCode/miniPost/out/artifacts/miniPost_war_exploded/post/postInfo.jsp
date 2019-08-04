@@ -43,11 +43,13 @@
                 <!-- Single button -->
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ${username} <span class="caret"></span>
+                        ${sessionScope.loginUsername} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="#">个人中心</a></li>
-                        <li><a href="/miniPost/userManage?method=getAllUserInfo">用户管理</a></li>
+                        <c:if test="${sessionScope.loginTypeId == 1}">
+                            <li><a href="/miniPost/userManage?method=getAllUserInfo">用户管理</a></li>
+                        </c:if>
                         <li role="separator" class="divider"></li>
                         <li><a href="${pageContext.request.contextPath}/index.jsp">退出登录</a></li>
                     </ul>
@@ -72,7 +74,9 @@
                 <a href="/miniPost/postView?method=listDetailByPostId&postId=${postItem.postId}"><h3>${postItem.postTitle} &raquo;</h3></a>
                 <p>${postItem.postContent}</p>
                 <span class="glyphicon glyphicon-user" style="cursor:pointer;color: #66afe9;">${postItem.userName}</span>&nbsp;&nbsp;&nbsp;
-                <span class="label label-info post-delete" style="cursor:pointer;" data-toggle="modal" data-target="#deletePostModal" title="${postItem.postId}">--</span>
+                <c:if test="${postItem.userId == sessionScope.loginUserId}">
+                    <span class="label label-info post-delete" style="cursor:pointer;" data-toggle="modal" data-target="#deletePostModal" title="${postItem.postId}">--</span>
+                </c:if>
             </div>
         </c:forEach>
     </div>

@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -44,15 +45,18 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("passWord");
 
         try {
-            int userId = userService.confirmLoginInfo(username, password);
-            System.out.println(username + "---" + password+" 是否在？userId:"+userId);
+            HashMap<String,Integer> userMap = userService.confirmLoginInfo(username, password);
 
-            request.getSession().setAttribute("confirmUser", userId);
-            response.setContentType("text/html;charset=utf-8");
-            response.setCharacterEncoding("UTF-8");
+            if(userMap != null){
+                int userId = userMap.get("userId");
+                int typeId = userMap.get("typeId");
+                System.out.println(username + "---" + password+" 是否在？userId:"+userId + " typeId:"+typeId);
 
-            if(userId != 0){
-                // ArrayList<PostInfo> postInfos = postService.getPostsByUserId(userId);
+                HttpSession session = request.getSession();
+                session.setAttribute("loginUserId", userId);
+                session.setAttribute("loginUsername", username);
+                session.setAttribute("loginTypeId", typeId);
+
                 JSONArray postInfos = postService.getAllPosts();
                 request.setAttribute("userId", userId);
                 request.setAttribute("username", username);

@@ -1,15 +1,11 @@
 package dao;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import config.DataAccess;
-import domain.PostDetail;
 import domain.PostInfo;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -51,7 +47,7 @@ public class PostDao {
         try {
             QueryRunner runner = new QueryRunner(DataAccess.getDataSource());
             Connection conn = DataAccess.getConnection();
-            String sql = "select detail_id as detailId, post_id as postId, detail_title as detailTitle, detail_content as detailContent from tbl_post_detail where post_id = ?";
+            String sql = "SELECT a.detail_id AS detailId, a.post_id AS postId, a.user_id AS userId, b.user_name AS userName, a.detail_title AS detailTitle, a.detail_content AS detailContent FROM tbl_post_detail a, tbl_user_info b WHERE a.user_id = b.user_id AND a.post_id = ?";
             Object obj = runner.query(conn, sql, new MapListHandler(), postId);
             if (obj == null) {
                 return null;

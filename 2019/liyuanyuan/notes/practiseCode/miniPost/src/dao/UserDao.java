@@ -4,6 +4,7 @@ import config.DataAccess;
 import domain.UserInfo;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
@@ -27,19 +28,15 @@ public class UserDao {
     }
 
     // 2.验证用户信息
-    public static int getUserId(String userName, String passWord) {
+    public static HashMap<String,Integer> getUserId(String userName, String passWord) {
         try {
             QueryRunner runner = new QueryRunner(DataAccess.getDataSource());
             Connection conn = DataAccess.getConnection();
             System.out.println("getAUser userName:"+userName+" passWord:"+passWord);
-            String sql = "select user_id as userId from tbl_user_info where user_name = ? and password = ?";
+            String sql = "select user_id as userId, type_id as typeId from tbl_user_info where user_name = ? and password = ?";
             String[] params = {userName, passWord};
-            Object obj = runner.query(conn, sql, new ScalarHandler(), params);
-            if (obj == null) {
-                return 0;
-            } else {
-                return (int)obj;
-            }
+            HashMap<String,Integer> map = (HashMap) runner.query(conn, sql, new MapHandler(), params);
+            return map;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

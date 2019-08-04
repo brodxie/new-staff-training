@@ -6,6 +6,8 @@ public class PostDetail {
 
     public int postId;
 
+    public int userId;
+
     public String detailTitle;
 
     public String detailContent;
@@ -24,6 +26,14 @@ public class PostDetail {
 
     public void setPostId(int postId) {
         this.postId = postId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getDetailTitle() {
@@ -65,6 +75,7 @@ public class PostDetail {
         return "PostDetail{" +
                 "detailId=" + detailId +
                 ", postId=" + postId +
+                ", userId=" + userId +
                 ", detailTitle='" + detailTitle + '\'' +
                 ", detailContent='" + detailContent + '\'' +
                 '}';

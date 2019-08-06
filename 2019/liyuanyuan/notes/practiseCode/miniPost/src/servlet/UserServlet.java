@@ -1,6 +1,6 @@
 package servlet;
 
-import com.alibaba.fastjson.JSONArray;
+import config.ToolConfig;
 import domain.UserInfo;
 import service.UserService;
 import service.serviceImpl.UserServiceImpl;
@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.sql.SQLException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 @WebServlet("/userManage")
@@ -62,16 +60,18 @@ public class UserServlet extends HttpServlet {
     // 增加用户
     public void addNewUser(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String userName = request.getParameter("userName");
-            String userType = request.getParameter("userType");
+            response.setContentType("text/html;charset=utf-8");
+            String userName = ToolConfig.getNewString(request.getParameter("userName"));
+            String userType = ToolConfig.getNewString(request.getParameter("userType"));
             String password = request.getParameter("password");
+
             userService.addNewUser(userName,userType,password);
             System.out.println("addNewUser action! userName:"+userName+" userType:"+userType+" password:"+password);
             getAllUserInfo(request,response);
             System.out.println("addNewUser pass!");
             request.setAttribute("addFeedInfo", "新用户添加成功!");
-        } catch (ServletException | SQLException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
             request.setAttribute("addFeedInfo", "新用户添加失败!");
         }
     }

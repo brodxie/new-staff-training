@@ -11,6 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -30,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/miniPost/postView?method=getAllByUser">贴吧LOGO</a>
+            <a class="navbar-brand" href="/miniPost/postView?method=getAllPosts">贴吧LOGO</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
@@ -81,7 +82,7 @@
             <div class="col-lg-6 col-md-6">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addUserModal">添加用户</button>
             </div>
-        </div><!-- /.row -->
+        </div>
     </div>
 </div>
 
@@ -107,13 +108,13 @@
                     <td>${user.signInTime}</td>
                     <td>
                         <c:if test="${user.userType == '超级管理员' }">
-                            <span class="glyphicon glyphicon-user" style="color: #2e6da4;"></span>
+                            <span class="glyphicon glyphicon-user" style="color: #FF7F50;"></span>
                         </c:if>
                         <c:if test="${user.userType == '普通管理员' }">
                             <span class="glyphicon glyphicon-user" style="color: #66afe9"></span>
                         </c:if>
                         <c:if test="${user.userType == '普通用户' }">
-                            <span class="glyphicon glyphicon-user user-update" style="cursor:pointer; color: lightgrey;" data-toggle="modal" data-target="#updateUserTypeModal" title="${user.userId}"></span>
+                            <span class="glyphicon glyphicon-user user-update" style="cursor:pointer; color: lightgrey;" data-toggle="modal" data-target="#updateUserTypeModal" title="更改为管理员" data-tmpId="${user.userId}"></span>
                         </c:if>
                     </td>
                 </tr>
@@ -166,9 +167,9 @@
                     <div class="form-group">
                         <label class="control-label">用户类型</label>
                         <select class="form-control" name="userType">
-                            <option>超级管理员</option>
-                            <option>普通管理员</option>
                             <option>普通用户</option>
+                            <option>普通管理员</option>
+                            <option>超级管理员</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -200,7 +201,7 @@
                 <h4 class="modal-title" id="deletePartPost">更改用户类型</h4>
             </div>
             <div class="modal-body">
-                <p>确定将此用户更改为管理员？</p>
+                <p>确定将此用户更改为普通管理员？</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -210,7 +211,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/bootstrapValidator.js"></script>
 <script type="text/javascript">
@@ -245,8 +246,8 @@
             }
         });
         $("span.user-update").click(function () {
-            console.log($(this).attr("title"));
-            var userId = $(this).attr("title");
+            console.log($(this).attr("data-tmpId"));
+            var userId = $(this).attr("data-tmpId");
 
             $("#cfmUpdateType").click(function () {
                 $.ajax({

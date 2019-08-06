@@ -1,7 +1,6 @@
 package servlet;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import domain.PostInfo;
 import service.PostService;
 import service.serviceImpl.PostServiceImpl;
@@ -11,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 
 @WebServlet("/postView")
@@ -43,18 +44,19 @@ public class PostServlet extends HttpServlet {
         doGet(request, response);
     }
 
-    // 获取所有帖子列表
-    public void getAllPosts(HttpServletRequest request, HttpServletResponse response) {
+    // 1. 获取所有帖子列表
+    public void getAllPosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             JSONArray postInfos = postService.getAllPosts();
             System.out.println("getAllPosts() json:"+postInfos);
-            response.getWriter().write(postInfos.toString());
-        } catch (IOException e) {
+            request.setAttribute("postInfos", postInfos);
+            request.getRequestDispatcher("/post/postInfo.jsp").forward(request, response);
+        } catch (IOException | ServletException e) {
             e.printStackTrace();
         }
     }
 
-    // 根据用户Id获取帖子列表
+    // 2. 根据用户Id获取帖子列表
     public void getAllByUser(HttpServletRequest request, HttpServletResponse response) {
         try {
             Integer userId = Integer.valueOf(request.getParameter("userId"));
@@ -68,7 +70,7 @@ public class PostServlet extends HttpServlet {
         }
     }
 
-    // 根据主贴id查询更贴详情
+    // 3. 根据主贴id查询更贴详情
     public void listDetailByPostId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("listDetailByPostId() action!");
         Integer postId = Integer.valueOf(request.getParameter("postId"));
@@ -89,7 +91,7 @@ public class PostServlet extends HttpServlet {
         request.getRequestDispatcher("/post/postDetail.jsp").forward(request, response);
     }
 
-    // 根据主贴id删除帖子
+    // 4. 根据主贴id删除帖子
     public void deletePostById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer postId = Integer.valueOf(request.getParameter("postId"));
         HashMap<String, Integer> deleteRow = postService.deletePostById(postId);
@@ -99,7 +101,7 @@ public class PostServlet extends HttpServlet {
         response.getWriter().write(JSONArray.toJSON(deleteRow).toString());
     }
 
-    // 根据子贴id删除子贴
+    // 5. 根据子贴id删除子贴
     public void deleteDetailById(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer detailId = Integer.valueOf(request.getParameter("detailId"));
         int deleteRow = postService.deleteDetailById(detailId);

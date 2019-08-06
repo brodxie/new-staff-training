@@ -11,6 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -31,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/post/postInfo.jsp">贴吧LOGO</a>
+            <a class="navbar-brand" href="/miniPost/postView?method=getAllPosts">贴吧LOGO</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
@@ -68,34 +69,76 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <span><h4>${postDetailMsg}</h4></span>
-        <c:forEach var="detailItem" items="${details}" varStatus="status">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h4><small><span class="label label-info">${status.index + 1}楼</span></small> ${detailItem.detailTitle}</h4>
-                        <p>${detailItem.detailContent}</p>
-                        <span class="glyphicon glyphicon-user" style="cursor:pointer;color: #66afe9;">${detailItem.userName}</span>
-                    </div>
-                    <div class="col-md-3" style="text-align: right;">
-                        <c:if test="${detailItem.userId == sessionScope.loginUserId}">
-                            <span class="glyphicon glyphicon-trash detail-delete" style="cursor:pointer" data-toggle="modal" data-target="#deletePartPostModal" title="${detailItem.detailId}"></span>
-                        </c:if>
-
-                    </div>
-                </div>
-                <hr>
+    <div>
+        <h3>主贴回复</h3>
+        <div class="row form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 col-sm-2 control-label"><h4>${postDetailMsg}</h4></label>
             </div>
-        </c:forEach>
+
+            <c:forEach var="detailItem" items="${details}" varStatus="status">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4><small><span class="label label-info">${status.index + 1}楼</span></small> ${detailItem.detailTitle}</h4>
+                            <p>${detailItem.detailContent}</p>
+                            <span class="glyphicon glyphicon-user" style="cursor:pointer;color: #66afe9;">${detailItem.userName}</span>
+                        </div>
+                        <div class="col-md-3" style="text-align: right;">
+                            <c:if test="${detailItem.userId == sessionScope.loginUserId || sessionScope.loginTypeId == 1}">
+                                <span class="glyphicon glyphicon-trash detail-delete" style="cursor:pointer" data-toggle="modal" data-target="#deletePartPostModal" title="点击删除" data-detailId="${detailItem.detailId}"></span>
+                            </c:if>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </c:forEach>
+        </div>
+
+        <c:if test="${details != null && details != ''}">
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                    <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </c:if>
     </div>
 
-    <nav aria-label="...">
-        <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
-    </nav>
+
+    <hr>
+
+    <div>
+        <h3>参与点评</h3>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="remarkTitle" class="col-md-2 col-sm-2 control-label">点评标题</label>
+                <div class="col-md-10 col-sm-10">
+                    <input type="text" class="form-control" id="remarkTitle" placeholder="请输入标题">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remarkContent" class="col-sm-2 control-label">点评内容</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" id="remarkContent" placeholder="请输入内容"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 仅自己可见
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" disabled="disabled">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <hr>
 
@@ -123,13 +166,13 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $("span.detail-delete").click(function () {
-            console.log($(this).attr("title"));
-            var detailId = $(this).attr("title");
+            console.log($(this).attr("data-detailId"));
+            var detailId = $(this).attr("data-detailId");
 
             $("#cfmDeleteDetail").click(function () {
                 $.ajax({
@@ -139,7 +182,6 @@
                         detailId: detailId
                     },
                     success: function (data) {
-                        console.log('cfmDeleteDetail data:'+data);
                         alert("删除成功！");
                         window.location.reload()
                     },

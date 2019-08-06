@@ -10,6 +10,7 @@
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -30,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="postInfo.jsp">贴吧LOGO</a>
+            <a class="navbar-brand" href="/miniPost/postView?method=getAllPosts">贴吧LOGO</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
@@ -40,7 +41,7 @@
                   <button class="btn btn-default" type="button">搜索</button>
                 </span>
                 </div>
-                <!-- Single button -->
+
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ${sessionScope.loginUsername} <span class="caret"></span>
@@ -68,26 +69,30 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <c:forEach var="postItem" items="${postInfos}" varStatus="status">
-            <div class="col-md-4 post-delete">
-                <a href="/miniPost/postView?method=listDetailByPostId&postId=${postItem.postId}"><h3>${postItem.postTitle} &raquo;</h3></a>
-                <p>${postItem.postContent}</p>
-                <span class="glyphicon glyphicon-user" style="cursor:pointer;color: #66afe9;">${postItem.userName}</span>&nbsp;&nbsp;&nbsp;
-                <c:if test="${postItem.userId == sessionScope.loginUserId}">
-                    <span class="label label-info post-delete" style="cursor:pointer;" data-toggle="modal" data-target="#deletePostModal" title="${postItem.postId}">--</span>
-                </c:if>
-            </div>
-        </c:forEach>
-    </div>
+    <c:if test="${postInfos != '' &&  postInfos != null}">
+        <div class="row">
+            <c:forEach var="postItem" items="${postInfos}" varStatus="status">
+                <div class="col-md-4">
+                    <a href="/miniPost/postView?method=listDetailByPostId&postId=${postItem.postId}"><h3>${postItem.postTitle} &raquo;</h3></a>
+                    <p>${postItem.postContent}</p>
+                    <span class="glyphicon glyphicon-user" style="cursor:pointer;color: #66afe9;">${postItem.userName}</span>&nbsp;&nbsp;&nbsp;
+                    <c:if test="${postItem.userId == sessionScope.loginUserId || sessionScope.loginTypeId == 1}">
+                        <span class="label label-info post-delete" style="cursor:pointer;" data-toggle="modal" data-target="#deletePostModal" title="点击删除" data-postId="${postItem.postId}">--</span>
+                    </c:if>
+                </div>
+            </c:forEach>
+        </div>
 
-    <nav aria-label="...">
-        <ul class="pager">
-            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
-        </ul>
-    </nav>
-
+        <nav aria-label="...">
+            <ul class="pager">
+                <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+        </nav>
+    </c:if>
+    <c:if test="${postInfos == '' ||  postInfos == null}">
+        <p>空空如也哦~</p>
+    </c:if>
     <hr>
 
     <footer>
@@ -114,13 +119,13 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function(){
         $("span.post-delete").click(function () {
-            console.log($(this).attr("title"));
-            var postId = $(this).attr("title");
+            console.log($(this).attr("data-postId"));
+            var postId = $(this).attr("data-postId");
 
             $("#cfmDeletePost").click(function () {
                 $.ajax({
@@ -130,8 +135,7 @@
                         postId: postId
                     },
                     success: function (data) {
-                        console.log('cfmDeletePost data:'+data)
-                        alert("删除成功！")
+                        alert("删除成功！");
                         window.location.reload()
                     },
                     error: function () {

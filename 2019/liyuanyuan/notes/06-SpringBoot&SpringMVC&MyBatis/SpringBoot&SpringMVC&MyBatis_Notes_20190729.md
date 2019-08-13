@@ -63,3 +63,51 @@ Spring MVC的视图解析器（ViewResolver）：定位视图，例如解析控�
 Spring是一种基于IoC容器编程的框架。
 
 Spring Boot是基于注解的开发Spring IoC。
+
+@Configuration：表示Java配置文件，Spring容器会根据它来生成IoC容器去装配Bean。
+
+@Bean：将特定方法返回的POJO装配到IoC容器中。
+
+@Component：标明哪个类被扫描进入Spring IoC容器。
+
+@ComponentScan：标明采用何种策略去扫描装配Bean。
+
+@Autowired：根据属性类型找到对应的Bean进行注入。可注解属性、方法、参数。
+
+@Primary：优先权的注解。
+
+@Quelifier：与Autowired组合以区别Bean实例。
+
+
+
+Spring Bean的主要生命周期：初始化--》依赖注入--》setBeanName方法–》setBeanFactory方法–》setApplicationContext方法–》postProcessBeforeInitialization方法--》自定义初始化方法–》afterPropertiesSet方法–-》postProcessAfterInitialization方法–》生存期–》自定义销毁方法--》destroy方法。
+
+
+
+@PostConstruct：定义初始化方法。
+
+@PreDestroy：定义销毁方法。
+
+@Value：使用${…}占位符对属性文件内容进行配置。#{…}启用Spring表达式，使其具有运算的功能。
+
+@PropertySource：定义对应的属性文件，加载到Spring的上下文中。
+
+
+
+Bean的作用域：单例、原型两类。
+
+作用域类型：
+
+| 作用域类型    | 使用范围       | 作用域描述                                           |
+| ------------- | -------------- | ---------------------------------------------------- |
+| singleton     | 所有Spring应用 | 默认值，IoC容器只存在单例                            |
+| prototype     | 所有Spring应用 | 每当从IoC容器取出一个Bean，则创建一个新Bean          |
+| session       | Spring Web应用 | HTTP会话                                             |
+| application   | Spring Web应用 | web工程生命周期                                      |
+| request       | Spring Web应用 | web工程单次请求                                      |
+| globalSession | Spring Web应用 | 在一个全局HTTP Session中，一个Bean定义对应一个实例。 |
+
+
+
+项目环境：开发环境、测试环境、准生产环境（用于模拟真实生产环境部署所用）、生产环境。
+

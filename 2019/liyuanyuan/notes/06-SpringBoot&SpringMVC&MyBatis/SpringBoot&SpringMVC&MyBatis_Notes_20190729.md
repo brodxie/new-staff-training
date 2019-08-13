@@ -49,3 +49,17 @@ Ear文件：Enterprise Application Archive，包含全部企业应用程序。�
 Linux安装jdk：https://www.cnblogs.com/imyalost/p/8709578.html
 
 Linux下安装Tomcat服务器和部署Web应用：https://www.cnblogs.com/xdp-gacl/p/4097608.html
+
+
+
+### Part 2
+
+Spring MVC的视图解析器（ViewResolver）：定位视图，例如解析控制器返回的逻辑名称。
+
+
+
+### Part 3
+
+Spring是一种基于IoC容器编程的框架。
+
+Spring Boot是基于注解的开发Spring IoC。

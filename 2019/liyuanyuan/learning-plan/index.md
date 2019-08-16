@@ -48,9 +48,12 @@ IDE使用IDEA。
 
 ## Ajax+JSON 2D
 
+## Maven学习
+学习基本的maven知识，参考电子书maven3.0.4学习教程一书
+
 ## SpringBoot+SpringMVC+MyBatis 3W
-- Maven基础
-- Spring基础
-- SpringBoot基础
-- SpringMVC
-- MyBatis
+参照《深入浅出SpringBoot2.x》一书进行学习。  
+学习第1、2、3、4、5、6、7、9、10、11、12、15、16  
+mybatis深入学习参考http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html  
+完成模拟百度贴吧系统的开发
+

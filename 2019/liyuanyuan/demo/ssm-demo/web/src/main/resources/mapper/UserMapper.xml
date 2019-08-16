@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.xieyu.ssmdemo.web.dao.UserDAO">
+    <select id="listAll" resultType="com.github.xieyu.ssmdemo.web.entity.User">
+        select * from t_user
+    </select>
+    <select id="getByUsername" resultType="com.github.xieyu.ssmdemo.web.entity.User">
+        select * from t_user where username = #{username}
+    </select>
+</mapper>

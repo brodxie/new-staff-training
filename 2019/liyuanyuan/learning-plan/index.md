@@ -28,7 +28,8 @@ IDE使用IDEA。
   先安装5.7版本  
   参考网上[教程](https://www.cnblogs.com/nicknailo/articles/8563737.html)  
 - SQL  
-  https://www.runoob.com/mysql/mysql-tutorial.html
+  https://www.runoob.com/mysql/mysql-tutorial.html  
+  数据库事务（https://www.runoob.com/mysql/mysql-transaction.html）  
 - JDBC  
   参见Java核心技术一书
 
@@ -53,7 +54,18 @@ IDE使用IDEA。
 
 ## SpringBoot+SpringMVC+MyBatis 3W
 参照《深入浅出SpringBoot2.x》一书进行学习。  
-学习第1、2、3、4、5、6、7、9、10、11、12、15、16  
+学习第1、2、3、5（整合mybatis）、6（简单了解，知道事务的概念，知道@Transactional注解的使用）、9、10、11、12、15 
+具体项目示例可以参考https://github.com/brodxie/xieyu-security  
 mybatis深入学习参考http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html  
-完成模拟百度贴吧系统的开发
+完成模拟百度贴吧系统的开发(SpringBoot,SpringMVC,MyBatis,MySQL,页面使用thymeleaf+bootstrap+jquery)  
+只有一个论坛、可以用户注册，注销，发帖，跟帖  
+管理员界面、系统有个初始管理员（admin），可以进入管理平台，可以添加管理员，管理员可以删帖，可以封人 
+部署到linux上  
+步骤：  
+1. 功能、设计页面（原型）
+2. 设计数据库表结构（Navicat）
+3. 设计接口（http://www.xiaoyaoji.cn）
+4. 搭建框架（maven多模块项目，提交到github上）
+
+
 

@@ -331,10 +331,80 @@ Redis处理：Redis性能比数据库要快得多，所以在响应高并发时�
 
 ### Part12: 部署、测试和监控
 
-部署步骤
+部署 Maven、测试JUnit、监控 Actuator
 
-将项目打包（war、jar包）
+
+
+**部署步骤**
+
+将项目打包（war、jar、rar、ear、pom等包）：mvn package（idea以管理员身份运行）
 
 运行项目（内嵌服务器、第三方服务器）
 
-[Maven教程](https://www.yiibai.com/maven)
+
+
+[Maven教程](https://www.yiibai.com/maven)     [一个小时学会Maven](https://www.cnblogs.com/best/p/9676515.html)
+
+Maven：Java项目管理构建自动化综合工具，类似于Java中的Ant、node.js中的npm、dotNet中的nuget、PHP中的Composer。
+
+作用：统一开发规范与工具，统一管理jar包
+
+功能：依赖的管理、项目的构建、项目的知识管理
+
+Maven库：http://repo2.maven.org/maven2/ 
+
+中央仓库资源：http://mvnrepository.com/；https://search.maven.org/
+
+将maven项目转为idea项目：mvn idea:idea
+
+POM：Project Object Model，项目对象模型
+
+
+
+**依赖范围**：
+
+表：依赖范围(scope)与classpath的关系
+
+| 依赖范围（Scope） | 编译 | 测试 | 运行 |              例子               |
+| :---------------: | :--: | :--: | :--: | :-----------------------------: |
+|      compile      |  Y   |  Y   |  Y   |           spring-core           |
+|       test        |  –   |  Y   |  –   |              JUnit              |
+|     provided      |  Y   |  Y   |  –   |           servlet-api           |
+|      runtime      |  –   |  Y   |  Y   |          JDBC驱动实现           |
+|      system       |  Y   |  Y   |  –   | 本地的，Maven仓库之外的类库文件 |
+
+**maven项目构建**
+
+**过程**：编译、测试、打包、集成测试、验证、部署
+
+
+
+**三种生命周期**
+
+Clean Lifecycle、Default Lifecycle、Site Lifecycle
+
+
+
+**约束优于配置**
+
+作用：减少修改配置的工作量，降低学习成本，给项目引入了统一规范
+
+**SNAPSHOT**：这个版本一般用于开发过程中，表示不稳定的版本。
+
+**LATEST**：指某个特定构件的最新发布，这个发布可能是一个发布版，也可能是一个snapshot版，具体看哪个时间最后。
+
+**RELEASE**：是指仓库中最后的一个非快照版本
+
+规范：
+
+1、同一项目中所有模块版本保持一致
+2、子模块统一继承父模块的版本
+3、统一在顶层模块Pom的<dependencyManagement/>节中定义所有子模块的依赖版本号，子模块中添加依赖时不要添加版本号
+4、开发测试阶段使用SNAPSHOT
+5、生产发布使用RELEASE
+6、新版本迭代只修改顶层POM中的版本
+
+
+
+Maven的概念模型
+

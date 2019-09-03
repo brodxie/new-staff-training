@@ -67,5 +67,9 @@ mybatis深入学习参考http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html
 3. 设计接口（http://www.xiaoyaoji.cn）
 4. 搭建框架（maven多模块项目，提交到github上）
 
+## nginx
+https://www.yiibai.com/nginx/nginx-feature.html
 
+## redis
+https://www.runoob.com/redis/redis-install.html
 

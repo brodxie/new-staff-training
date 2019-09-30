@@ -6,12 +6,12 @@
     
     <servlet>
         <servlet-name>miniPostServlet</servlet-name>
-        <servlet-class>servlet.UserServlet</servlet-class>
+        <servlet-class>/servlet/UserServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>miniPostServlet</servlet-name>
-        <url-pattern>/postServlet</url-pattern>
+        <url-pattern>/loginServlet</url-pattern>
     </servlet-mapping>
 
     <jsp-config>
